@@ -16,11 +16,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import app.just.actionstorage.common.TestConstants;
 import app.just.actionstorage.entity.ActionEntity;
 import app.just.actionstorage.entity.SourceEntity;
-import app.just.actionstorage.mapper.ActionEntityMapperImpl;
-import app.just.actionstorage.mapper.SourceEntityMapperImpl;
+import app.just.actionstorage.mapper.ActionEntityMapper;
 import app.just.actionstorage.repository.ActionRepository;
 import app.just.actionstorage.repository.SourceRepository;
 import app.just.actionstorage.serivce.ActionService;
@@ -50,7 +48,7 @@ public class ActionServiceUnitTest {
   @InjectMocks
   private ActionService actionService;
   @Mock
-  private ActionEntityMapperImpl actionEntityMapper;
+  private ActionEntityMapper actionEntityMapper;
   @Mock
   private ActionRepository actionRepository;
   @Mock

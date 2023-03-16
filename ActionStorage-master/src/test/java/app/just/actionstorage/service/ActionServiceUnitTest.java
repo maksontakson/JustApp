@@ -25,6 +25,7 @@ import app.just.actionstorage.serivce.ActionService;
 import app.just.common.dto.ActionDto;
 import app.just.common.dto.CreateNewActionRequestDto;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -57,11 +58,9 @@ public class ActionServiceUnitTest {
   @Test
   void givenTestListsOfEntities_WhenProceedNewActionsWithValidActionRequestDtos_ThenReturnActionDtoList() {
     List<ActionEntity> actionEntityList = new ArrayList<>();
-    actionEntityList.add(VALID_ACTION_ENTITY_1);
-    actionEntityList.add(VALID_ACTION_ENTITY_2);
+    addActionEntities(actionEntityList, VALID_ACTION_ENTITY_1, VALID_ACTION_ENTITY_2);
     List<SourceEntity> sourceEntityList = new ArrayList<>();
-    sourceEntityList.add(ACTIVE_EMAIL_SOURCE_ENTITY);
-    sourceEntityList.add(ACTIVE_PHONE_SOURCE_ENTITY);
+    addSourceEntities(sourceEntityList, ACTIVE_EMAIL_SOURCE_ENTITY, ACTIVE_PHONE_SOURCE_ENTITY);
 
     when(actionEntityMapper.toNewEntity(ACTION_REQUEST_VALID_DTO_1)).thenReturn(
         VALID_ACTION_ENTITY_1);
@@ -83,11 +82,9 @@ public class ActionServiceUnitTest {
   @Test
   void givenTestListsOfEntities_WhenProceedNewActionsWithInvalidActionRequestDtos_ThenReturnEmptyList() {
     List<ActionEntity> actionEntityList = new ArrayList<>();
-    actionEntityList.add(VALID_ACTION_ENTITY_1);
-    actionEntityList.add(INVALID_ACTION_ENTITY_1);
+    addActionEntities(actionEntityList, VALID_ACTION_ENTITY_1, INVALID_ACTION_ENTITY_1);
     List<SourceEntity> sourceEntityList = new ArrayList<>();
-    sourceEntityList.add(ACTIVE_EMAIL_SOURCE_ENTITY);
-    sourceEntityList.add(ACTIVE_PHONE_SOURCE_ENTITY);
+    addSourceEntities(sourceEntityList, ACTIVE_EMAIL_SOURCE_ENTITY, ACTIVE_PHONE_SOURCE_ENTITY);
 
     when(actionEntityMapper.toNewEntity(ACTION_REQUEST_VALID_DTO_1)).thenReturn(
         VALID_ACTION_ENTITY_1);
@@ -108,9 +105,9 @@ public class ActionServiceUnitTest {
   @Test
   void givenTestListsOfEntity_WhenProceedNewActionsWithInvalidActionRequestSingleDto_ThenReturnEmptyList() {
     List<ActionEntity> actionEntityList = new ArrayList<>();
-    actionEntityList.add(VALID_ACTION_ENTITY_1);
+    addActionEntities(actionEntityList, VALID_ACTION_ENTITY_1);
     List<SourceEntity> sourceEntityList = new ArrayList<>();
-    sourceEntityList.add(ACTIVE_EMAIL_SOURCE_ENTITY);
+    addSourceEntities(sourceEntityList, ACTIVE_EMAIL_SOURCE_ENTITY);
 
     when(actionEntityMapper.toNewEntity(ACTION_REQUEST_VALID_DTO_1)).thenReturn(
         VALID_ACTION_ENTITY_1);
@@ -122,5 +119,12 @@ public class ActionServiceUnitTest {
     verify(actionRepository, never()).saveAll(actionEntityList);
     verify(actionEntityMapper, never()).toDto(VALID_ACTION_ENTITY_1);
     assertThat(actionDtoList.size()).isZero();
+  }
+
+  private static void addActionEntities(List<ActionEntity> entityList, ActionEntity ... actionEntities) {
+    entityList.addAll(Arrays.asList(actionEntities));
+  }
+  private static void addSourceEntities(List<SourceEntity> entityList, SourceEntity ... actionEntities) {
+    entityList.addAll(Arrays.asList(actionEntities));
   }
 }

@@ -1,31 +1,26 @@
 package app.just.actionstorage.service;
 
-import static app.just.actionstorage.common.TestConstants.Model.USER_NAME1;
-import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.DESCRIPTION;
-import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.EMAIL;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.when;
-
 import app.just.actionstorage.entity.UserEntity;
 import app.just.actionstorage.mapper.UserEntityMapperImpl;
 import app.just.actionstorage.repository.UserRepository;
 import app.just.actionstorage.serivce.UserService;
 import app.just.common.dto.UserDto;
-import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
+import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY_BUILDER;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class UserServiceUnitTest {
-  private static final UserEntity USER_ENTITY = UserEntity.builder()
-      .username(USER_NAME1)
-      .email(EMAIL)
-      .description(DESCRIPTION)
-      .build();
+  private static final UserEntity USER_ENTITY = USER_ENTITY_BUILDER;
   @InjectMocks
   private UserService userService;
   @Mock

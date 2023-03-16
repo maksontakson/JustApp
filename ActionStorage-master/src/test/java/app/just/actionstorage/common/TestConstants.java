@@ -1,30 +1,28 @@
 package app.just.actionstorage.common;
 
-import app.just.actionstorage.entity.SourceEntity;
-import app.just.common.dto.ActionType;
-import app.just.common.dto.SourceDto;
-import app.just.common.dto.SourceType;
-import java.time.Instant;
-import java.util.UUID;
+import app.just.actionstorage.entity.UserEntity;
 
 public final class TestConstants {
 
-  private TestConstants() {
-  }
-
-  public static final class Model {
-    public static final String USER_NAME1 = "test_user_first";
-
-    private Model() {
+    private TestConstants() {
     }
 
-    public static final class UserEntityAttributes {
+    public static final class Model {
+        public static final String USER_NAME1 = "test_user_first";
 
-      public static final String EMAIL = "test@gmail.com";
-      public static final String DESCRIPTION = "testDescription";
+        private Model() {
+        }
 
-      private UserEntityAttributes() {
-      }
+        public static final class UserEntityAttributes {
+            public static final String EMAIL = "test@gmail.com";
+            public static final String DESCRIPTION = "testDescription";
+            public static final UserEntity USER_ENTITY_BUILDER = UserEntity.builder()
+                    .username(USER_NAME1)
+                    .email(EMAIL)
+                    .description(DESCRIPTION)
+                    .build();
+            private UserEntityAttributes() {
+            }
+        }
     }
-  }
 }

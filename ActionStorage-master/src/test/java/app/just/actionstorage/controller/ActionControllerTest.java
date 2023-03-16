@@ -1,23 +1,30 @@
 package app.just.actionstorage.controller;
 
+import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_1_BUILDER;
+import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_2_BUILDER;
 import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.CREATE_NEW_ACTION_REQUEST_DTO_BUILDER1;
 import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.CREATE_NEW_ACTION_REQUEST_DTO_BUILDER2;
 import static app.just.actionstorage.common.TestConstants.Path.ACTION_CONTROLLER_POST;
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import app.just.actionstorage.common.TestConstants;
 import app.just.actionstorage.repository.AbstractTest;
+import app.just.actionstorage.repository.ActionRepository;
 import app.just.common.dto.CreateNewActionRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -26,6 +33,8 @@ import org.springframework.test.web.servlet.MockMvc;
 public class ActionControllerTest extends AbstractTest {
   @Autowired
   private MockMvc mockMvc;
+  @MockBean
+  private ActionRepository actionRepository;
 
   private static final CreateNewActionRequestDto ACTION_REQUEST_DTO_1 =
       CREATE_NEW_ACTION_REQUEST_DTO_BUILDER1;
@@ -34,6 +43,7 @@ public class ActionControllerTest extends AbstractTest {
 
   @Test
   public void whenPostListEmployees_ThenStatus200() throws Exception {
+    Mockito.when(actionRepository.saveAll(any())).thenReturn(List.of(VALID_ACTION_ENTITY_1_BUILDER, VALID_ACTION_ENTITY_2_BUILDER));
     this.mockMvc.perform(post(ACTION_CONTROLLER_POST)
             .contentType(MediaType.APPLICATION_JSON)
             .content(asJsonString(List.of(ACTION_REQUEST_DTO_1, ACTION_REQUEST_DTO_2))))

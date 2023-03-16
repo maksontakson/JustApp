@@ -1,12 +1,12 @@
 package app.just.actionstorage.common;
 
+import app.just.actionstorage.entity.ActionEntity;
 import app.just.actionstorage.entity.SourceEntity;
 import app.just.common.dto.ActionType;
 import app.just.common.dto.CreateNewActionRequestDto;
 import app.just.common.dto.SourceDto;
 import app.just.common.dto.SourceType;
 import java.time.Instant;
-import java.util.UUID;
 
 public final class TestConstants {
 
@@ -76,7 +76,8 @@ public final class TestConstants {
 
     public static final class ActionEntityAttributes {
 
-      public static final String ID = UUID.randomUUID().toString();
+
+      public static final String ID = "3273f55f-5669-43f9-b280-1bfb87e19597";
       public static final SourceEntity ACTIVE_EMAIL_SOURCE_ENTITY = SourceEntity.builder()
           .type(SourceType.EMAIL)
           .active(true)
@@ -84,6 +85,20 @@ public final class TestConstants {
       public static final SourceEntity ACTIVE_PHONE_SOURCE_ENTITY = SourceEntity.builder()
           .type(SourceType.PHONE)
           .active(true)
+          .build();
+      public static final ActionEntity VALID_ACTION_ENTITY_1_BUILDER = ActionEntity.builder()
+          .id(ID)
+          .username(USER_NAME1)
+          .date(DATE)
+          .type(VALID_ACTION_TYPE_FINISH_TRANSACTION)
+          .source(ACTIVE_PHONE_SOURCE_ENTITY)
+          .build();
+      public static final ActionEntity VALID_ACTION_ENTITY_2_BUILDER = ActionEntity.builder()
+          .id(ID)
+          .username(USER_NAME1)
+          .date(DATE)
+          .type(VALID_ACTION_TYPE_START_TRANSACTION)
+          .source(ACTIVE_EMAIL_SOURCE_ENTITY)
           .build();
 
       private ActionEntityAttributes() {

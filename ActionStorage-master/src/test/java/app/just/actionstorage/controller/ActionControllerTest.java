@@ -2,8 +2,8 @@ package app.just.actionstorage.controller;
 
 import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_1_BUILDER;
 import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_2_BUILDER;
-import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.CREATE_NEW_ACTION_REQUEST_DTO_BUILDER1;
-import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.CREATE_NEW_ACTION_REQUEST_DTO_BUILDER2;
+import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_DTO_1;
+import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_DTO_2;
 import static app.just.actionstorage.common.TestConstants.Path.ACTION_CONTROLLER_POST;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
@@ -12,10 +12,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import app.just.actionstorage.common.TestConstants;
 import app.just.actionstorage.repository.AbstractTest;
 import app.just.actionstorage.repository.ActionRepository;
-import app.just.common.dto.CreateNewActionRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.util.List;
@@ -35,11 +33,6 @@ public class ActionControllerTest extends AbstractTest {
   private MockMvc mockMvc;
   @MockBean
   private ActionRepository actionRepository;
-
-  private static final CreateNewActionRequestDto ACTION_REQUEST_DTO_1 =
-      CREATE_NEW_ACTION_REQUEST_DTO_BUILDER1;
-  private static final CreateNewActionRequestDto ACTION_REQUEST_DTO_2 =
-      CREATE_NEW_ACTION_REQUEST_DTO_BUILDER2;
 
   @Test
   public void whenPostListEmployees_ThenStatus200() throws Exception {

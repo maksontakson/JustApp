@@ -55,14 +55,14 @@ public final class TestConstants {
           .active(true)
           .build();
 
-      public static final CreateNewActionRequestDto CREATE_NEW_ACTION_REQUEST_DTO_BUILDER1 =
+      public static final CreateNewActionRequestDto ACTION_REQUEST_DTO_1 =
           CreateNewActionRequestDto.builder()
               .username(USER_NAME1)
               .type(VALID_ACTION_TYPE_START_TRANSACTION)
               .date(DATE)
               .source(ACTIVE_EMAIL_SOURCE_DTO)
               .build();
-      public static final CreateNewActionRequestDto CREATE_NEW_ACTION_REQUEST_DTO_BUILDER2 =
+      public static final CreateNewActionRequestDto ACTION_REQUEST_DTO_2 =
           CreateNewActionRequestDto.builder()
               .username(USER_NAME1)
               .type(VALID_ACTION_TYPE_FINISH_TRANSACTION)

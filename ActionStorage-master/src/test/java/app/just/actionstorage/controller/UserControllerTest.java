@@ -4,6 +4,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import app.just.actionstorage.common.TestConstants;
@@ -30,7 +31,11 @@ public class UserControllerTest extends AbstractTest {
   public void givenEmployeesInDb_whenGetEmployees_ThenStatus200() throws Exception {
     this.mockMvc.perform(get(TestConstants.Path.USER_CONTROLLER_POST)).andDo(print())
         .andExpect(status().isOk()).andExpect(content()
-            .string(containsString("test_user_first")));
+            .string(containsString("[{\"username\":\"test_user_first\",\"email\":\"" +
+                "test1@gmail.com\",\"description\":\"just first user\"},{\"username\":\"" +
+                "test_second_user\",\"email\":\"test2@test.com\",\"description\":\"justUser\"}," +
+                "{\"username\":\"third_user\",\"email\":\"3test@test.test\",\"description\"" +
+                ":\"3 user\"}]")));
   }
 
   @Test

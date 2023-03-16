@@ -38,7 +38,12 @@ public class ActionControllerTest extends AbstractTest {
             .contentType(MediaType.APPLICATION_JSON)
             .content(asJsonString(List.of(ACTION_REQUEST_DTO_1, ACTION_REQUEST_DTO_2))))
         .andDo(print())
-        .andExpect(status().isOk()).andExpect(content().string(containsString("test_user_first")));
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("[{\"username\":\"test_user_first\"")))
+        .andExpect(content().string(containsString("\"type\":\"START_TRANSACTION\",\"source" +
+            "\":{\"type\":\"EMAIL\",\"active\":true}}")))
+        .andExpect(content().string(containsString("\"type\":\"FINISH_TRANSACTION\",\"source" +
+            "\":{\"type\":\"PHONE\",\"active\":true}}")));
   }
 
   @Test

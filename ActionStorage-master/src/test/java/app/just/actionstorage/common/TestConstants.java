@@ -28,7 +28,7 @@ public final class TestConstants {
           .active(true)
           .build();
 
-      public static final ActionEntity ACTION_ENTITY_BUILDER = ActionEntity.builder()
+      public static final ActionEntity ACTION_ENTITY = ActionEntity.builder()
           .id(ID)
           .username(USER_NAME1)
           .date(DATE)

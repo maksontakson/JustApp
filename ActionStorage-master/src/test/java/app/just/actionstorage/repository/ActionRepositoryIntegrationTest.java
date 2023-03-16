@@ -1,6 +1,6 @@
 package app.just.actionstorage.repository;
 
-import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.ACTION_ENTITY_BUILDER;
+import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.ACTION_ENTITY;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import app.just.actionstorage.entity.ActionEntity;
@@ -18,8 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class ActionRepositoryIntegrationTest extends AbstractTest {
   @Autowired
   private ActionRepository actionRepository;
-
-  private static final ActionEntity ACTION_ENTITY = ACTION_ENTITY_BUILDER;
 
   @Test
   @DataSet("source.yml")

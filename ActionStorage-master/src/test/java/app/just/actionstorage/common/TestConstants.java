@@ -75,8 +75,6 @@ public final class TestConstants {
     }
 
     public static final class ActionEntityAttributes {
-
-
       public static final String ID = "3273f55f-5669-43f9-b280-1bfb87e19597";
       public static final SourceEntity ACTIVE_EMAIL_SOURCE_ENTITY = SourceEntity.builder()
           .type(SourceType.EMAIL)

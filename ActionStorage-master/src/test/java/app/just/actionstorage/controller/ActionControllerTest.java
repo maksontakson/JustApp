@@ -36,7 +36,8 @@ public class ActionControllerTest extends AbstractTest {
 
   @Test
   public void whenPostListEmployees_ThenStatus200() throws Exception {
-    Mockito.when(actionRepository.saveAll(any())).thenReturn(List.of(VALID_ACTION_ENTITY_1_BUILDER, VALID_ACTION_ENTITY_2_BUILDER));
+    Mockito.when(actionRepository.saveAll(any())).thenReturn(List.of(VALID_ACTION_ENTITY_1_BUILDER,
+        VALID_ACTION_ENTITY_2_BUILDER));
     this.mockMvc.perform(post(ACTION_CONTROLLER_POST)
             .contentType(MediaType.APPLICATION_JSON)
             .content(asJsonString(List.of(ACTION_REQUEST_DTO_1, ACTION_REQUEST_DTO_2))))

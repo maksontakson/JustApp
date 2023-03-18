@@ -25,7 +25,6 @@ public class ActionRepositoryIntegrationTest extends AbstractTest {
   @ExpectedDataSet("action.yml")
   public void whenFindAll_thenReturnUserEntityList() {
     List<ActionEntity> all = actionRepository.saveAll(List.of(ACTION_ENTITY));
-    System.out.println(all);
     assertThat(1).isEqualTo(all.size());
   }
 }

@@ -110,10 +110,11 @@ public class ActionServiceUnitTest {
     assertThat(actionDtoList.size()).isZero();
   }
 
-  private static void addActionEntities(List<ActionEntity> entityList, ActionEntity ... actionEntities) {
+  private static void addActionEntities(List<ActionEntity> entityList, ActionEntity... actionEntities) {
     entityList.addAll(Arrays.asList(actionEntities));
   }
-  private static void addSourceEntities(List<SourceEntity> entityList, SourceEntity ... actionEntities) {
+
+  private static void addSourceEntities(List<SourceEntity> entityList, SourceEntity... actionEntities) {
     entityList.addAll(Arrays.asList(actionEntities));
   }
 }

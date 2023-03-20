@@ -106,7 +106,6 @@ public final class TestConstants {
               .source(ACTIVE_PHONE_SOURCE_DTO)
               .build();
 
-
       private CreateNewActionRequestDtoAttributes() {
       }
     }

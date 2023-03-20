@@ -17,6 +17,7 @@ import app.just.actionstorage.repository.UserRepository;
 import com.github.database.rider.core.api.configuration.DBUnit;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.spring.api.DBRider;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DBRider
 public class UserControllerTest extends AbstractTest {
   @Autowired
   private MockMvc mockMvc;
@@ -35,23 +35,24 @@ public class UserControllerTest extends AbstractTest {
   private UserRepository userRepository;
 
   @Test
-  @DataSet(value = "addusers.yml")
-  @DBUnit(caseSensitiveTableNames = true)
   public void givenEmployeesInDb_whenGetEmployees_ThenStatus200() throws Exception {
     when(userRepository.findAll()).thenReturn(List.of(USER_ENTITY1, USER_ENTITY2, USER_ENTITY3));
     this.mockMvc.perform(get(TestConstants.Path.USER_CONTROLLER_POST)).andDo(print())
-        .andExpect(status().isOk()).andExpect(content()
-            .string(containsString("[{\"username\":\"test_user_first\",\"email\":\"" +
-                "test1@gmail.com\",\"description\":\"just first user\"},{\"username\":\"" +
-                "test_second_user\",\"email\":\"test2@test.com\",\"description\":\"justUser\"}," +
-                "{\"username\":\"third_user\",\"email\":\"3test@test.test\",\"description\"" +
-                ":\"3 user\"}]")));
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$[0].username").value("test_user_first"))
+        .andExpect(jsonPath("$[0].email").value("test1@gmail.com"))
+        .andExpect(jsonPath("$[0].description").value("just first user"))
+        .andExpect(jsonPath("$[1].username").value("test_second_user"))
+        .andExpect(jsonPath("$[1].email").value("test2@test.com"))
+        .andExpect(jsonPath("$[1].description").value("justUser"))
+        .andExpect(jsonPath("$[2].username").value("third_user"))
+        .andExpect(jsonPath("$[2].email").value("3test@test.test"))
+        .andExpect(jsonPath("$[2].description").value("3 user"));
   }
 
   @Test
-  @DataSet(value = "nousers.yml")
-  @DBUnit(caseSensitiveTableNames = true)
   public void givenEmptyEmpTable_whenGetEmployees_ThenStatus200() throws Exception {
+    when(userRepository.findAll()).thenReturn(Collections.emptyList());
     this.mockMvc.perform(get(TestConstants.Path.USER_CONTROLLER_POST)).andDo(print())
         .andExpect(status().isOk()).andExpect(content().string("[]"));
   }

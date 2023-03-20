@@ -5,14 +5,12 @@ import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttr
 import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_DTO_1;
 import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_DTO_2;
 import static app.just.actionstorage.common.TestConstants.Path.ACTION_CONTROLLER_POST;
-import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import app.just.actionstorage.repository.AbstractTest;
 import app.just.actionstorage.repository.ActionRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -28,7 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ActionControllerTest extends AbstractTest {
+public class ActionControllerTest {
   @Autowired
   private MockMvc mockMvc;
   @MockBean
@@ -43,11 +41,16 @@ public class ActionControllerTest extends AbstractTest {
             .content(asJsonString(List.of(ACTION_REQUEST_DTO_1, ACTION_REQUEST_DTO_2))))
         .andDo(print())
         .andExpect(status().isOk())
-        .andExpect(content().string(containsString("[{\"username\":\"test_user_first\"")))
-        .andExpect(content().string(containsString("\"type\":\"START_TRANSACTION\",\"source" +
-            "\":{\"type\":\"EMAIL\",\"active\":true}}")))
-        .andExpect(content().string(containsString("\"type\":\"FINISH_TRANSACTION\",\"source" +
-            "\":{\"type\":\"PHONE\",\"active\":true}}")));
+        .andExpect(jsonPath("$[0].id").value("3273f55f-5669-43f9-b280-1bfb87e19597"))
+        .andExpect(jsonPath("$[0].username").value("test_user_first"))
+        .andExpect(jsonPath("$[0].type").value("FINISH_TRANSACTION"))
+        .andExpect(jsonPath("$[0].source.type").value("PHONE"))
+        .andExpect(jsonPath("$[0].source.active").value("true"))
+        .andExpect(jsonPath("$[1].id").value("5c6fa687-6115-4c0c-99a8-f67f4f2b8bb0"))
+        .andExpect(jsonPath("$[1].username").value("test_second_user"))
+        .andExpect(jsonPath("$[1].type").value("START_TRANSACTION"))
+        .andExpect(jsonPath("$[1].source.type").value("EMAIL"))
+        .andExpect(jsonPath("$[1].source.active").value("true"));
   }
 
   @Test

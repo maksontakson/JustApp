@@ -76,6 +76,7 @@ public final class TestConstants {
 
     public static final class ActionEntityAttributes {
       public static final String ID = "3273f55f-5669-43f9-b280-1bfb87e19597";
+      public static final String ID2 = "5c6fa687-6115-4c0c-99a8-f67f4f2b8bb0";
       public static final SourceEntity ACTIVE_EMAIL_SOURCE_ENTITY = SourceEntity.builder()
           .type(SourceType.EMAIL)
           .active(true)
@@ -92,8 +93,8 @@ public final class TestConstants {
           .source(ACTIVE_PHONE_SOURCE_ENTITY)
           .build();
       public static final ActionEntity VALID_ACTION_ENTITY_2_BUILDER = ActionEntity.builder()
-          .id(ID)
-          .username(USER_NAME1)
+          .id(ID2)
+          .username(USER_NAME2)
           .date(DATE)
           .type(VALID_ACTION_TYPE_START_TRANSACTION)
           .source(ACTIVE_EMAIL_SOURCE_ENTITY)

@@ -2,6 +2,7 @@ package app.just.actionstorage.common;
 
 import app.just.actionstorage.entity.ActionEntity;
 import app.just.actionstorage.entity.SourceEntity;
+import app.just.actionstorage.entity.UserEntity;
 import app.just.common.dto.ActionType;
 import app.just.common.dto.CreateNewActionRequestDto;
 import app.just.common.dto.SourceDto;
@@ -100,6 +101,17 @@ public final class TestConstants {
           .build();
 
       private ActionEntityAttributes() {
+      }
+    }
+    public static final class UserEntityAttributes {
+      public static final String EMAIL = "test@gmail.com";
+      public static final String DESCRIPTION = "testDescription";
+      public static final UserEntity USER_ENTITY = UserEntity.builder()
+          .username(USER_NAME1)
+          .email(EMAIL)
+          .description(DESCRIPTION)
+          .build();
+      private UserEntityAttributes() {
       }
     }
   }

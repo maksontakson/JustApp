@@ -3,7 +3,6 @@ package app.just.actionstorage.controller;
 import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY1;
 import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY2;
 import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY3;
-import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -12,11 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import app.just.actionstorage.common.TestConstants;
-import app.just.actionstorage.repository.AbstractTest;
 import app.just.actionstorage.repository.UserRepository;
-import com.github.database.rider.core.api.configuration.DBUnit;
-import com.github.database.rider.core.api.dataset.DataSet;
-import com.github.database.rider.spring.api.DBRider;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -28,7 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTest extends AbstractTest {
+public class UserControllerTest {
   @Autowired
   private MockMvc mockMvc;
   @MockBean

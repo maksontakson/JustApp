@@ -1,0 +1,10 @@
+usr:
+  - username: "test_user_first"
+    email: "test1@gmail.com"
+    description: "just first user"
+  - username: "test_second_user"
+    email: "test2@test.com"
+    description: "justUser"
+  - username: "third_user"
+    email: "3test@test.test"
+    description: "3 user"

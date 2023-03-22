@@ -1,6 +1,6 @@
 package app.just.actionstorage.service;
 
-import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY;
+import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY_1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
@@ -27,8 +27,8 @@ public class UserServiceUnitTest {
 
   @Test
   void whenFindAll_ThenReturnListOfMappedDto() {
-    when(userRepository.findAll()).thenReturn(List.of(USER_ENTITY));
-    when(userEntityMapper.toDto(USER_ENTITY)).thenCallRealMethod();
+    when(userRepository.findAll()).thenReturn(List.of(USER_ENTITY_1));
+    when(userEntityMapper.toDto(USER_ENTITY_1)).thenCallRealMethod();
     List<UserDto> all = userService.findAll();
 
     assertThat(1).isEqualTo(all.size());

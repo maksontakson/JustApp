@@ -3,8 +3,9 @@ package app.just.actionstorage.service;
 import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.ACTIVE_EMAIL_SOURCE_ENTITY;
 import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.ACTIVE_PHONE_SOURCE_ENTITY;
 import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.INVALID_ACTION_ENTITY_1;
-import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_1;
+import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME;
 import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_2;
+import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_2_WITH_THE_SAME_NAME;
 import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_INVALID_DTO;
 import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_VALID_DTO_1;
 import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_VALID_DTO_2;
@@ -47,14 +48,15 @@ public class ActionServiceUnitTest {
   @Test
   void givenTestListsOfEntities_WhenProceedNewActionsWithValidActionRequestDtos_ThenReturnActionDtoList() {
     List<ActionEntity> actionEntityList = new ArrayList<>();
-    addActionEntities(actionEntityList, VALID_ACTION_ENTITY_1, VALID_ACTION_ENTITY_2);
+    addActionEntities(actionEntityList, VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME,
+        VALID_ACTION_ENTITY_2_WITH_THE_SAME_NAME);
     List<SourceEntity> sourceEntityList = new ArrayList<>();
     addSourceEntities(sourceEntityList, ACTIVE_EMAIL_SOURCE_ENTITY, ACTIVE_PHONE_SOURCE_ENTITY);
 
     when(actionEntityMapper.toNewEntity(ACTION_REQUEST_VALID_DTO_1)).thenReturn(
-        VALID_ACTION_ENTITY_1);
+        VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME);
     when(actionEntityMapper.toNewEntity(ACTION_REQUEST_VALID_DTO_2)).thenReturn(
-        VALID_ACTION_ENTITY_2);
+        VALID_ACTION_ENTITY_2_WITH_THE_SAME_NAME);
     when(actionRepository.saveAll(any())).thenReturn(actionEntityList);
 
     List<ActionDto> actionDtoList =
@@ -63,20 +65,20 @@ public class ActionServiceUnitTest {
 
     verify(sourceRepository, only()).saveAll(sourceEntityList);
     verify(actionRepository, only()).saveAll(actionEntityList);
-    verify(actionEntityMapper, times(1)).toDto(VALID_ACTION_ENTITY_1);
-    verify(actionEntityMapper, times(1)).toDto(VALID_ACTION_ENTITY_2);
+    verify(actionEntityMapper, times(1)).toDto(VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME);
+    verify(actionEntityMapper, times(1)).toDto(VALID_ACTION_ENTITY_2_WITH_THE_SAME_NAME);
     assertThat(2).isEqualTo(actionDtoList.size());
   }
 
   @Test
   void givenTestListsOfEntities_WhenProceedNewActionsWithInvalidActionRequestDtos_ThenReturnEmptyList() {
     List<ActionEntity> actionEntityList = new ArrayList<>();
-    addActionEntities(actionEntityList, VALID_ACTION_ENTITY_1, INVALID_ACTION_ENTITY_1);
+    addActionEntities(actionEntityList, VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME, INVALID_ACTION_ENTITY_1);
     List<SourceEntity> sourceEntityList = new ArrayList<>();
     addSourceEntities(sourceEntityList, ACTIVE_EMAIL_SOURCE_ENTITY, ACTIVE_PHONE_SOURCE_ENTITY);
 
     when(actionEntityMapper.toNewEntity(ACTION_REQUEST_VALID_DTO_1)).thenReturn(
-        VALID_ACTION_ENTITY_1);
+        VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME);
     when(actionEntityMapper.toNewEntity(ACTION_REQUEST_INVALID_DTO)).thenReturn(
         INVALID_ACTION_ENTITY_1);
 
@@ -86,7 +88,7 @@ public class ActionServiceUnitTest {
     Mockito.verify(actionEntityMapper, Mockito.times(2)).toNewEntity(any());
     verify(sourceRepository, never()).saveAll(sourceEntityList);
     verify(actionRepository, never()).saveAll(actionEntityList);
-    verify(actionEntityMapper, never()).toDto(VALID_ACTION_ENTITY_1);
+    verify(actionEntityMapper, never()).toDto(VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME);
     verify(actionEntityMapper, never()).toDto(INVALID_ACTION_ENTITY_1);
     assertThat(actionDtoList.size()).isZero();
   }
@@ -94,19 +96,19 @@ public class ActionServiceUnitTest {
   @Test
   void givenTestListsOfEntity_WhenProceedNewActionsWithInvalidActionRequestSingleDto_ThenReturnEmptyList() {
     List<ActionEntity> actionEntityList = new ArrayList<>();
-    addActionEntities(actionEntityList, VALID_ACTION_ENTITY_1);
+    addActionEntities(actionEntityList, VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME);
     List<SourceEntity> sourceEntityList = new ArrayList<>();
     addSourceEntities(sourceEntityList, ACTIVE_EMAIL_SOURCE_ENTITY);
 
     when(actionEntityMapper.toNewEntity(ACTION_REQUEST_VALID_DTO_1)).thenReturn(
-        VALID_ACTION_ENTITY_1);
+        VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME);
 
     List<ActionDto> actionDtoList =
         actionService.proceedNewActions(List.of(ACTION_REQUEST_VALID_DTO_1));
 
     verify(sourceRepository, never()).saveAll(sourceEntityList);
     verify(actionRepository, never()).saveAll(actionEntityList);
-    verify(actionEntityMapper, never()).toDto(VALID_ACTION_ENTITY_1);
+    verify(actionEntityMapper, never()).toDto(VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME);
     assertThat(actionDtoList.size()).isZero();
   }
 

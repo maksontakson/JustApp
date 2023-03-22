@@ -1,6 +1,6 @@
 package app.just.actionstorage.repository;
 
-import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.ACTION_ENTITY;
+import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import app.just.actionstorage.entity.ActionEntity;
@@ -24,7 +24,8 @@ public class ActionRepositoryIntegrationTest extends AbstractTest {
   @DBUnit(caseSensitiveTableNames = true)
   @ExpectedDataSet("action.yml")
   public void whenFindAll_thenReturnUserEntityList() {
-    List<ActionEntity> all = actionRepository.saveAll(List.of(ACTION_ENTITY));
+    List<ActionEntity> all = actionRepository.saveAll(List.of(
+        VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME));
     assertThat(1).isEqualTo(all.size());
   }
 }

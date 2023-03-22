@@ -1,8 +1,8 @@
 package app.just.actionstorage.controller;
 
-import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY1;
-import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY2;
-import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY3;
+import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY_1;
+import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY_2;
+import static app.just.actionstorage.common.TestConstants.Model.UserEntityAttributes.USER_ENTITY_3;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -31,7 +31,7 @@ public class UserControllerTest {
 
   @Test
   public void givenEmployeesInDb_whenGetEmployees_ThenStatus200() throws Exception {
-    when(userRepository.findAll()).thenReturn(List.of(USER_ENTITY1, USER_ENTITY2, USER_ENTITY3));
+    when(userRepository.findAll()).thenReturn(List.of(USER_ENTITY_1, USER_ENTITY_2, USER_ENTITY_3));
     this.mockMvc.perform(get(TestConstants.Path.USER_CONTROLLER_POST)).andDo(print())
         .andExpect(status().isOk())
         .andExpect(jsonPath("$[0].username").value("test_user_first"))

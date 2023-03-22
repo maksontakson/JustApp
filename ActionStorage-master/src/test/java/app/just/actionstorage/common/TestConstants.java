@@ -45,17 +45,17 @@ public final class TestConstants {
       public static final String DESCRIPTION2 = "justUser";
       public static final String EMAIL3 = "3test@test.test";
       public static final String DESCRIPTION3 = "3 user";
-      public static final UserEntity USER_ENTITY1 = UserEntity.builder()
+      public static final UserEntity USER_ENTITY_1 = UserEntity.builder()
           .username(USER_NAME1)
           .email(EMAIL1)
           .description(DESCRIPTION1)
           .build();
-      public static final UserEntity USER_ENTITY2 = UserEntity.builder()
+      public static final UserEntity USER_ENTITY_2 = UserEntity.builder()
           .username(USER_NAME2)
           .email(EMAIL2)
           .description(DESCRIPTION2)
           .build();
-      public static final UserEntity USER_ENTITY3 = UserEntity.builder()
+      public static final UserEntity USER_ENTITY_3 = UserEntity.builder()
           .username(USER_NAME3)
           .email(EMAIL3)
           .description(DESCRIPTION3)
@@ -86,6 +86,9 @@ public final class TestConstants {
 
       public static final CreateNewActionRequestDto ACTION_REQUEST_VALID_DTO_2 =
           CreateNewActionRequestDto.builder()
+              .username(USER_NAME1)
+              .type(VALID_ACTION_TYPE_FINISH_TRANSACTION)
+              .date(DATE)
               .source(ACTIVE_PHONE_SOURCE_DTO)
               .build();
 
@@ -96,7 +99,6 @@ public final class TestConstants {
               .type(INVALID_ACTION_TYPE)
               .source(ACTIVE_PHONE_SOURCE_DTO)
               .build();
-
 
       private CreateNewActionRequestDtoAttributes() {
       }
@@ -113,21 +115,28 @@ public final class TestConstants {
           .type(SourceType.PHONE)
           .active(true)
           .build();
-      public static final ActionEntity VALID_ACTION_ENTITY_1= ActionEntity.builder()
+      public static final ActionEntity VALID_ACTION_ENTITY_1_WITH_THE_SAME_NAME = ActionEntity.builder()
           .id(ID)
+          .username(USER_NAME1)
+          .date(DATE)
+          .type(VALID_ACTION_TYPE_START_TRANSACTION)
+          .source(ACTIVE_EMAIL_SOURCE_ENTITY)
+          .build();
+      public static final ActionEntity VALID_ACTION_ENTITY_2_WITH_THE_SAME_NAME = ActionEntity.builder()
+          .id(ID2)
           .username(USER_NAME1)
           .date(DATE)
           .type(VALID_ACTION_TYPE_FINISH_TRANSACTION)
           .source(ACTIVE_PHONE_SOURCE_ENTITY)
           .build();
-      public static final ActionEntity VALID_ACTION_ENTITY_2= ActionEntity.builder()
+      public static final ActionEntity VALID_ACTION_ENTITY_2 = ActionEntity.builder()
           .id(ID2)
           .username(USER_NAME2)
           .date(DATE)
-          .type(VALID_ACTION_TYPE_START_TRANSACTION)
-          .source(ACTIVE_EMAIL_SOURCE_ENTITY)
+          .type(VALID_ACTION_TYPE_FINISH_TRANSACTION)
+          .source(ACTIVE_PHONE_SOURCE_ENTITY)
           .build();
-      public static final ActionEntity INVALID_ACTION_ENTITY_1= ActionEntity.builder()
+      public static final ActionEntity INVALID_ACTION_ENTITY_1 = ActionEntity.builder()
           .id(ID2)
           .username(USER_NAME2)
           .date(DATE)
@@ -136,18 +145,6 @@ public final class TestConstants {
           .build();
 
       private ActionEntityAttributes() {
-      }
-    }
-    public static final class UserEntityAttributes {
-      public static final String EMAIL = "test@gmail.com";
-      public static final String DESCRIPTION = "testDescription";
-      public static final UserEntity USER_ENTITY = UserEntity.builder()
-          .username(USER_NAME1)
-          .email(EMAIL)
-          .description(DESCRIPTION)
-          .build();
-
-      private UserEntityAttributes() {
       }
     }
   }

@@ -1,0 +1,5 @@
+action:
+  - id: "3273f55f-5669-43f9-b280-1bfb87e19597"
+    type: "START_TRANSACTION"
+    username: "test_user_first"
+    source_type: "EMAIL"

@@ -2,12 +2,12 @@ package app.just.actionstorage.service;
 
 import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.ACTIVE_EMAIL_SOURCE_ENTITY;
 import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.ACTIVE_PHONE_SOURCE_ENTITY;
-import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.INVALID_ACTION_ENTITY_1_BUILDER;
-import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_1_BUILDER;
-import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_2_BUILDER;
-import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_INVALID_DTO_BUILDER;
-import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_VALID_DTO_1_BUILDER;
-import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_VALID_DTO_2_BUILDER;
+import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.INVALID_ACTION_ENTITY_1;
+import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_1;
+import static app.just.actionstorage.common.TestConstants.Model.ActionEntityAttributes.VALID_ACTION_ENTITY_2;
+import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_INVALID_DTO;
+import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_VALID_DTO_1;
+import static app.just.actionstorage.common.TestConstants.Model.CreateNewActionRequestDtoAttributes.ACTION_REQUEST_VALID_DTO_2;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
@@ -23,7 +23,6 @@ import app.just.actionstorage.repository.ActionRepository;
 import app.just.actionstorage.repository.SourceRepository;
 import app.just.actionstorage.serivce.ActionService;
 import app.just.common.dto.ActionDto;
-import app.just.common.dto.CreateNewActionRequestDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,16 +35,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class ActionServiceUnitTest {
-  private static final CreateNewActionRequestDto ACTION_REQUEST_VALID_DTO_1 =
-      ACTION_REQUEST_VALID_DTO_1_BUILDER;
-  private static final CreateNewActionRequestDto ACTION_REQUEST_VALID_DTO_2 =
-      ACTION_REQUEST_VALID_DTO_2_BUILDER;
-  private static final CreateNewActionRequestDto ACTION_REQUEST_INVALID_DTO =
-      ACTION_REQUEST_INVALID_DTO_BUILDER;
-  private static final ActionEntity VALID_ACTION_ENTITY_1 = VALID_ACTION_ENTITY_1_BUILDER;
-  private static final ActionEntity VALID_ACTION_ENTITY_2 = VALID_ACTION_ENTITY_2_BUILDER;
-  private static final ActionEntity INVALID_ACTION_ENTITY_1 = INVALID_ACTION_ENTITY_1_BUILDER;
-
   @InjectMocks
   private ActionService actionService;
   @Mock
@@ -121,10 +110,11 @@ public class ActionServiceUnitTest {
     assertThat(actionDtoList.size()).isZero();
   }
 
-  private static void addActionEntities(List<ActionEntity> entityList, ActionEntity ... actionEntities) {
+  private static void addActionEntities(List<ActionEntity> entityList, ActionEntity... actionEntities) {
     entityList.addAll(Arrays.asList(actionEntities));
   }
-  private static void addSourceEntities(List<SourceEntity> entityList, SourceEntity ... actionEntities) {
+
+  private static void addSourceEntities(List<SourceEntity> entityList, SourceEntity... actionEntities) {
     entityList.addAll(Arrays.asList(actionEntities));
   }
 }

@@ -8,7 +8,6 @@ import app.just.common.dto.CreateNewActionRequestDto;
 import app.just.common.dto.SourceDto;
 import app.just.common.dto.SourceType;
 import java.time.Instant;
-import java.util.UUID;
 
 public final class TestConstants {
 
@@ -37,15 +36,6 @@ public final class TestConstants {
     private Model() {
     }
 
-    public static final class UserEntityAttributes {
-
-      public static final String EMAIL = "test@gmail.com";
-      public static final String DESCRIPTION = "testDescription";
-
-      private UserEntityAttributes() {
-      }
-    }
-
     public static final class CreateNewActionRequestDtoAttributes {
 
       public static final SourceDto ACTIVE_EMAIL_SOURCE_DTO = SourceDto.builder()
@@ -57,20 +47,27 @@ public final class TestConstants {
           .active(true)
           .build();
 
-      public static final CreateNewActionRequestDto ACTION_REQUEST_DTO_1 =
+      public static final CreateNewActionRequestDto ACTION_REQUEST_VALID_DTO_1 =
           CreateNewActionRequestDto.builder()
               .username(USER_NAME1)
               .type(VALID_ACTION_TYPE_START_TRANSACTION)
               .date(DATE)
               .source(ACTIVE_EMAIL_SOURCE_DTO)
               .build();
-      public static final CreateNewActionRequestDto ACTION_REQUEST_DTO_2 =
+
+      public static final CreateNewActionRequestDto ACTION_REQUEST_VALID_DTO_2 =
           CreateNewActionRequestDto.builder()
-              .username(USER_NAME1)
-              .type(VALID_ACTION_TYPE_FINISH_TRANSACTION)
-              .date(DATE)
               .source(ACTIVE_PHONE_SOURCE_DTO)
               .build();
+
+      public static final CreateNewActionRequestDto ACTION_REQUEST_INVALID_DTO =
+          CreateNewActionRequestDto.builder()
+              .username(USER_NAME2)
+              .date(DATE)
+              .type(INVALID_ACTION_TYPE)
+              .source(ACTIVE_PHONE_SOURCE_DTO)
+              .build();
+
 
       private CreateNewActionRequestDtoAttributes() {
       }
@@ -87,25 +84,31 @@ public final class TestConstants {
           .type(SourceType.PHONE)
           .active(true)
           .build();
-      public static final ActionEntity VALID_ACTION_ENTITY_1_BUILDER = ActionEntity.builder()
+      public static final ActionEntity VALID_ACTION_ENTITY_1= ActionEntity.builder()
           .id(ID)
           .username(USER_NAME1)
           .date(DATE)
           .type(VALID_ACTION_TYPE_FINISH_TRANSACTION)
           .source(ACTIVE_PHONE_SOURCE_ENTITY)
           .build();
-      public static final ActionEntity VALID_ACTION_ENTITY_2_BUILDER = ActionEntity.builder()
+      public static final ActionEntity VALID_ACTION_ENTITY_2= ActionEntity.builder()
           .id(ID2)
           .username(USER_NAME2)
           .date(DATE)
           .type(VALID_ACTION_TYPE_START_TRANSACTION)
           .source(ACTIVE_EMAIL_SOURCE_ENTITY)
           .build();
+      public static final ActionEntity INVALID_ACTION_ENTITY_1= ActionEntity.builder()
+          .id(ID2)
+          .username(USER_NAME2)
+          .date(DATE)
+          .type(INVALID_ACTION_TYPE)
+          .source(ACTIVE_EMAIL_SOURCE_ENTITY)
+          .build();
 
       private ActionEntityAttributes() {
       }
     }
-    
     public static final class UserEntityAttributes {
       public static final String EMAIL = "test@gmail.com";
       public static final String DESCRIPTION = "testDescription";
@@ -114,6 +117,7 @@ public final class TestConstants {
           .email(EMAIL)
           .description(DESCRIPTION)
           .build();
+
       private UserEntityAttributes() {
       }
     }
